@@ -11,6 +11,7 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.coordinator.FeatureCoordinator
 import com.example.coordinator.FeatureCoordinatorToFragment
 import com.example.main.presentation.activity.MainActivity
 import com.example.main.presentation.fragment.NotPermissionsFragment
@@ -18,7 +19,7 @@ import com.example.main.presentation.fragment.NotPermissionsFragment
 internal class MainRouter(
     private val activity: FragmentActivity,
     private val fragmentContainerID: Int,
-    private val qrCodeScannerCoordinator: FeatureCoordinatorToFragment
+    private val qrCodeScannerCoordinator: FeatureCoordinatorToFragment,
 ) {
 
     private companion object {
@@ -57,6 +58,10 @@ internal class MainRouter(
         }
     }
 
+    fun openMainActivity(activity: FragmentActivity) {
+        activity.startActivity(Intent(activity, MainActivity::class.java))
+        activity.finish()
+    }
 
     private fun setCurrentActiveFragmentLD() {
         _currentActiveFragmentLD.value =
